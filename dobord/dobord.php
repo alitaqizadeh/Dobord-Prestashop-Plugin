@@ -45,7 +45,8 @@ class Dobord extends Module
 	{
 		if(isset($_GET['dobord_session_id']))
 		{
-			setcookie("dbrdsid", $_GET['dobord_session_id'], time() + 3600);
+			$domain = ($_SERVER['HTTP_HOST'] != 'localhost') ? $_SERVER['HTTP_HOST'] : false;
+			setcookie("dbrdsid", $_GET['dobord_session_id'], time() + 3600, "/", $domain, false);
 		}
 	}
 	public function hookActionValidateOrder($params)
@@ -114,6 +115,7 @@ class Dobord extends Module
                 $response_cache_back_money = curl_exec($ch);
                 curl_close($ch);
             }
+        	setcookie("dbrdsid", "", time() - 3600, "/");
 		}
 	}
 }
