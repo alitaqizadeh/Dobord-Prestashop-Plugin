@@ -85,7 +85,7 @@ class Dobord extends Module
         	];
 
         	$ch = curl_init();
-        	curl_setopt($ch, CURLOPT_URL, "http://site.dobord.com/merchant");
+        	curl_setopt($ch, CURLOPT_URL, "https://site.dobord.com/merchant");
 	        curl_setopt($ch, CURLOPT_POST, 1);
 	        curl_setopt($ch, CURLOPT_POSTFIELDS,
 	            http_build_query($auth));
@@ -107,7 +107,7 @@ class Dobord extends Module
 
                 $ch = curl_init();
 
-                curl_setopt($ch, CURLOPT_URL, "http://site.dobord.com/customer");
+                curl_setopt($ch, CURLOPT_URL, "https://site.dobord.com/customer");
                 curl_setopt($ch, CURLOPT_POST, 1);
                 curl_setopt($ch, CURLOPT_POSTFIELDS,
                     http_build_query($customer));
@@ -116,6 +116,8 @@ class Dobord extends Module
                 curl_close($ch);
             }
         	setcookie("dbrdsid", "", time() - 3600, "/");
+        	header("Location: https://dobord.com/searchstore");
+			die();
 		}
 	}
 }
